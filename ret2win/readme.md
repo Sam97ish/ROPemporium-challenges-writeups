@@ -131,3 +131,5 @@ zsh: segmentation fault (core dumped)  ./ret2win32 < payload
 
 Success!
 
+PS: You can find all the commands ran in GDB in the file .gdb_history.
+
