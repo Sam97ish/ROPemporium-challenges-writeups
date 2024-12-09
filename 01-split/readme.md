@@ -125,20 +125,20 @@ We now want to analyze the binary to see how this buffer overflow could be used 
 This can be done using various tools. I like using GDB but Ghidra is also an option for static analysis and for more readable decompiled code.
 
 We can start by listing the functions we have in the binary.
-![alt text](image.png)
+![alt text](img/image.png)
 A lot of spicy functions here such as printf@plt, puts@plt and system@plt. These are all external functions defined in the libc library and is called by this binary.
 
 The three functions we care about here is `main`, `pwnme` and `usefulFunction`.
 
 Let's see what these do.
 
-![alt text](image-1.png)
+![alt text](img/image-1.png)
 
 The main function prints some texts and then calls pwnme.
 
 Let's check pwnme
 
-![alt text](image-2.png)
+![alt text](img/image-2.png)
 
 Seems like it's printing some stuff and then reading some input. This corresponds well with what we saw earlier when we ran the program. The function is reading from the stdin file descriptor.
 
@@ -148,7 +148,7 @@ The `usefulFunction` does not seem to be used anywhere.
 
 Let's check what's up with it.
 
-![alt text](image-3.png)
+![alt text](img/image-3.png)
 
 It's conveniently calling `system` which is a dangerous libc function that can run an arbitrary shell command. We can see it's moving something to the `edi` register as input to the system function call. Let's see what that might be.
 
@@ -214,7 +214,7 @@ python2 -c 'print "a"*40 + "\xc3\x07\x40\x00\x00\x00\x00\x00" + "\x60\x10\x60\x0
 This make the chain `[40 padding + pop_rdi_gadget + address of /bin/cat flag.txt + address of system]`. This is how it will be in the stack too. You can execute this with GDB to watch it in action.
 
 So running this on my machine doesn't actually work! We run into a segfault due to this problem below.
-![alt text](image-4.png)
+![alt text](img/iimage-4.png)
 
 The stack is not 16 bytes aligned, which is a requirement for 64 bit calling convention. You can read more about it [here](https://ir0nstone.gitbook.io/notes/binexp/stack/return-oriented-programming/stack-alignment).
 
