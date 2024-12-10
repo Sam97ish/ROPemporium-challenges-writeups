@@ -1,6 +1,6 @@
 # callme
 
-We will go with the 32bit variant with this one. I will alternate between 64bit and 32bit for each challenge.
+32bit version of the binary.
 
 The further we go on the challenges, the less I will explain in order not to repeat the same information. Feel free to search anything that isn't clear, I will do my best to always leave good pointers for further research.
 
