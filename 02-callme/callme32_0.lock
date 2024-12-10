@@ -1,0 +1,9 @@
+#Ghidra Lock File
+#Tue Dec 10 10:13:47 CET 2024
+OS\ Name=Linux
+OS\ Version=5.15.167.4-microsoft-standard-WSL2
+Username=kali
+Hostname=Babylon
+<META>\ Supports\ File\ Channel\ Locking=Channel Lock
+OS\ Architecture=amd64
+Timestamp=12/10/24, 10\:13 AM
